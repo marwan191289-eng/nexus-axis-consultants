@@ -344,6 +344,48 @@
   }
 }
 
+  /* Grayscale to colour reveal animation */
+  .photo-reveal {
+    animation: grayscaleToColor 3.5s ease-out forwards;
+    animation-delay: 0.3s;
+    filter: grayscale(100%);
+  }
+  @keyframes grayscaleToColor {
+    0%   { filter: grayscale(100%) brightness(0.9) contrast(1.05); }
+    40%  { filter: grayscale(80%)  brightness(0.95) contrast(1.02); }
+    70%  { filter: grayscale(30%)  brightness(1); }
+    100% { filter: grayscale(0%)   brightness(1) contrast(1); }
+  }
+
+  .photo-bg-premium {
+    background: linear-gradient(
+      145deg,
+      #0a1929 0%,
+      #1a3a52 35%,
+      #2d5a7b 65%,
+      #1a3a52 100%
+    );
+    position: relative;
+    overflow: hidden;
+  }
+  .photo-bg-premium::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      rgba(201,168,76,0.04) 0px,
+      rgba(201,168,76,0.04) 1px,
+      transparent 1px,
+      transparent 40px
+    );
+    z-index: 0;
+  }
+  .photo-bg-premium img {
+    position: relative;
+    z-index: 1;
+  }
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #f5f3ee; }

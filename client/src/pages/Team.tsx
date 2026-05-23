@@ -23,7 +23,7 @@ export default function Team() {
         "Mergers & Acquisitions",
         "Contract Negotiation",
       ],
-      email: "marwan@nexusaxisconsultants.com",
+      email: "info@nexusaxisconsultants.com",
       phone: "+971 585 592 355",
       whatsapp: "https://wa.me/message/BSPKDIEB7H22H1",
       credentials: [
@@ -36,7 +36,7 @@ export default function Team() {
     {
       name: "Mohab Samy",
       title: "Partner — Legal Services",
-      image: "https://images.unsplash.com/photo-1556157382-97eda2f9e2bf?w=600&h=750&fit=crop&q=80",
+      image: "/mohab-samy.png",
       bio: [
         "Mohab Samy is a Partner at Nexus Axis Consultants, leading the firm's legal services division with a distinguished career focused on commercial litigation, labour law, and regulatory compliance across the UAE and Egypt.",
         "A seasoned litigator and legal strategist, Mohab brings an exceptional command of UAE court procedure, arbitration processes, and employment regulation. He has successfully represented corporate clients in complex multi-party commercial disputes, labour tribunal proceedings, and enforcement actions before the UAE's federal and emirate-level courts. His methodical approach to case preparation and his deep familiarity with judicial temperament across jurisdictions have yielded a proven record of favourable outcomes.",
@@ -50,7 +50,7 @@ export default function Team() {
         "Corporate Legal Advisory",
         "Contract Law & Enforcement",
       ],
-      email: "mohab@nexusaxisconsultants.com",
+      email: "info@nexusaxisconsultants.com",
       phone: "+971 585 592 355",
       whatsapp: "https://wa.me/message/BSPKDIEB7H22H1",
       credentials: [
@@ -119,15 +119,18 @@ export default function Team() {
                 <div className={idx % 2 === 1 ? "lg:col-start-2" : ""}>
                   <div className="relative">
                     {/* Gold frame accent */}
-                    <div className="absolute -top-3 -left-3 w-2/3 h-2/3 border-2 border-[#C9A84C]/20 rounded-xl" />
-                    <div className="relative rounded-xl overflow-hidden shadow-2xl">
+                    <div className="absolute -top-4 -left-4 w-3/4 h-3/4 border border-[#C9A84C]/30 rounded-2xl" />
+                    <div className="absolute -bottom-4 -right-4 w-1/2 h-1/2 border border-[#C9A84C]/15 rounded-2xl" />
+                    <div className={`relative rounded-2xl overflow-hidden shadow-2xl ${idx === 0 ? "photo-bg-premium" : "bg-gradient-to-br from-[#1a3a52] to-[#0f1f2e]"}`}>
                       <img
                         src={member.image}
                         alt={member.name}
-                        className="w-full aspect-[4/5] object-cover object-top"
+                        className={`w-full aspect-[4/5] object-cover object-top ${idx === 0 ? "photo-reveal" : ""}`}
                       />
                       {/* Overlay gradient at bottom */}
-                      <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-[#0f1f2e]/80 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-[#0a1929]/90 via-[#0a1929]/40 to-transparent" />
+                      {/* Gold shimmer line at top */}
+                      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C9A84C]/60 to-transparent" />
                       <div className="absolute bottom-0 left-0 right-0 p-6">
                         <a
                           href={member.whatsapp}
