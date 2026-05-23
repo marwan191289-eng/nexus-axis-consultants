@@ -13,16 +13,15 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location]);
+  useEffect(() => { setIsOpen(false); }, [location]);
 
   const navLinks = [
-    { href: "/", label: "Home" },
+    { href: "/",        label: "Home" },
     { href: "/services", label: "Services" },
-    { href: "/team", label: "Our Team" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: "/pricing",  label: "Pricing" },
+    { href: "/team",     label: "Our Team" },
+    { href: "/about",    label: "About" },
+    { href: "/contact",  label: "Contact" },
   ];
 
   const isActive = (href: string) =>
@@ -39,31 +38,28 @@ export default function Navigation() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
+
             {/* Logo */}
             <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
-                <div className="relative w-11 h-11 flex items-center justify-center flex-shrink-0">
-                  <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-11 h-11">
-                    <rect width="44" height="44" rx="8" fill="#1a3a52"/>
-                    <path d="M9 8.5h6.2L28.8 26.3V8.5H35V35.5h-6.2L15.2 17.7V35.5H9V8.5z" fill="#C9A84C"/>
-                  </svg>
-                </div>
-                <div className="hidden sm:flex flex-col leading-none">
-                  <span className="text-base font-bold text-[#1a3a52] tracking-wide leading-none">
-                    NEXUS AXIS
-                  </span>
-                  <span className="text-[10px] font-semibold text-[#C9A84C] tracking-[0.2em] leading-none mt-0.5">
-                    CONSULTANTS
-                  </span>
-                </div>
+              <div className="relative w-11 h-11 flex items-center justify-center flex-shrink-0">
+                <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-11 h-11">
+                  <rect width="44" height="44" rx="8" fill="#1a3a52"/>
+                  <path d="M9 8.5h6.2L28.8 26.3V8.5H35V35.5h-6.2L15.2 17.7V35.5H9V8.5z" fill="#C9A84C"/>
+                </svg>
+              </div>
+              <div className="hidden sm:flex flex-col leading-none">
+                <span className="text-base font-bold text-[#1a3a52] tracking-wide leading-none">NEXUS AXIS</span>
+                <span className="text-[10px] font-semibold text-[#C9A84C] tracking-[0.2em] leading-none mt-0.5">CONSULTANTS</span>
+              </div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-1">
+            {/* Desktop Nav */}
+            <div className="hidden lg:flex items-center gap-0.5">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative px-4 py-2 text-sm font-semibold transition-colors duration-200 rounded-lg ${
+                  className={`relative px-3.5 py-2 text-sm font-semibold transition-colors duration-200 rounded-lg ${
                     isActive(link.href)
                       ? "text-[#C9A84C]"
                       : "text-slate-600 hover:text-[#1a3a52]"
@@ -71,7 +67,7 @@ export default function Navigation() {
                 >
                   {link.label}
                   {isActive(link.href) && (
-                    <span className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#C9A84C] rounded-full" />
+                    <span className="absolute bottom-0 left-3.5 right-3.5 h-0.5 bg-[#C9A84C] rounded-full" />
                   )}
                 </Link>
               ))}
@@ -97,22 +93,18 @@ export default function Navigation() {
               </a>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile toggle */}
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="lg:hidden p-2.5 rounded-lg hover:bg-slate-50 transition-colors"
               aria-label="Toggle menu"
             >
-              {isOpen ? (
-                <X className="w-5 h-5 text-[#1a3a52]" />
-              ) : (
-                <Menu className="w-5 h-5 text-[#1a3a52]" />
-              )}
+              {isOpen ? <X className="w-5 h-5 text-[#1a3a52]" /> : <Menu className="w-5 h-5 text-[#1a3a52]" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Nav */}
         {isOpen && (
           <div className="lg:hidden border-t border-slate-100 bg-white">
             <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
@@ -153,7 +145,7 @@ export default function Navigation() {
         )}
       </nav>
 
-      {/* Floating WhatsApp Button */}
+      {/* Floating WhatsApp */}
       <a
         href="https://wa.me/message/BSPKDIEB7H22H1"
         target="_blank"

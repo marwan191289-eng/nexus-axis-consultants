@@ -1,15 +1,23 @@
+import { useEffect, useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Mail, Phone, MessageCircle, Award, BookOpen, Briefcase, Scale, Shield, Globe, Users, Target } from "lucide-react";
 
-const marwanPhoto = "/marwan-negm.jpg";
-
 export default function Team() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(false);
+    const t = setTimeout(() => setMounted(true), 30);
+    return () => clearTimeout(t);
+  }, []);
+
   const leadership = [
     {
       name: "Marwan Negm",
       title: "Founder & Managing Partner",
-      image: marwanPhoto,
+      image: "/marwan-negm.jpg",
+      isFounder: true,
       bio: [
         "Marwan Negm is the visionary Founder and Managing Partner of Nexus Axis Consultants — a firm he built from the ground up into one of the UAE and Egypt's most respected legal and corporate advisory practices.",
         "With over 15 years of distinguished experience spanning corporate law, commercial litigation, and international business advisory, Marwan has consistently delivered transformative legal solutions for clients ranging from ambitious startups to global multinationals. His strategic acumen and deep knowledge of both UAE and Egyptian legal frameworks make him uniquely positioned to navigate the complexities of cross-border transactions and multi-jurisdictional disputes.",
@@ -37,9 +45,10 @@ export default function Team() {
       name: "Mohab Samy",
       title: "Partner — Legal Services",
       image: "/mohab-samy.png",
+      isFounder: false,
       bio: [
         "Mohab Samy is a Partner at Nexus Axis Consultants, leading the firm's legal services division with a distinguished career focused on commercial litigation, labour law, and regulatory compliance across the UAE and Egypt.",
-        "A seasoned litigator and legal strategist, Mohab brings an exceptional command of UAE court procedure, arbitration processes, and employment regulation. He has successfully represented corporate clients in complex multi-party commercial disputes, labour tribunal proceedings, and enforcement actions before the UAE's federal and emirate-level courts. His methodical approach to case preparation and his deep familiarity with judicial temperament across jurisdictions have yielded a proven record of favourable outcomes.",
+        "A seasoned litigator and legal strategist, Mohab brings an exceptional command of UAE court procedure, arbitration processes, and employment regulation. He has successfully represented corporate clients in complex multi-party commercial disputes, labour tribunal proceedings, and enforcement actions before the UAE's federal and emirate-level courts.",
         "Mohab advises a diverse client base — from family-owned businesses to listed corporations — on dispute resolution strategy, employment contract structuring, workforce regulatory compliance, and the full spectrum of legal risk management. His counsel is characterised by analytical rigour, pragmatic judgement, and an absolute commitment to protecting client interests.",
       ],
       expertise: [
@@ -112,54 +121,73 @@ export default function Team() {
       {/* Team Members */}
       <section className="py-20 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-24">
+          <div className="space-y-28">
             {leadership.map((member, idx) => (
-              <div key={idx} className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-start ${idx % 2 === 1 ? "lg:grid-flow-dense" : ""}`}>
-                {/* Photo */}
-                <div className={idx % 2 === 1 ? "lg:col-start-2" : ""}>
-                  <div className="relative">
-                    {/* Gold frame accent */}
-                    <div className="absolute -top-4 -left-4 w-3/4 h-3/4 border border-[#C9A84C]/30 rounded-2xl" />
-                    <div className="absolute -bottom-4 -right-4 w-1/2 h-1/2 border border-[#C9A84C]/15 rounded-2xl" />
-                    <div className={`relative rounded-2xl overflow-hidden shadow-2xl ${idx === 0 ? "photo-bg-premium" : "bg-gradient-to-br from-[#1a3a52] to-[#0f1f2e]"}`}>
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className={`w-full aspect-[4/5] object-cover object-top ${idx === 0 ? "photo-reveal" : ""}`}
-                      />
-                      {/* Overlay gradient at bottom */}
-                      <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-[#0a1929]/90 via-[#0a1929]/40 to-transparent" />
-                      {/* Gold shimmer line at top */}
-                      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C9A84C]/60 to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-6">
-                        <a
-                          href={member.whatsapp}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 bg-[#25D366] text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#1da851] transition-colors"
-                        >
-                          <MessageCircle className="w-4 h-4" />
-                          WhatsApp Direct
-                        </a>
-                      </div>
-                    </div>
-                    {/* Credentials sidebar */}
-                    <div className="mt-4 grid grid-cols-1 gap-3">
-                      {member.credentials.map(({ icon: Icon, text }, cidx) => (
-                        <div key={cidx} className="flex items-center gap-3 bg-[#FAF8F3] border border-slate-100 rounded-lg px-4 py-3">
-                          <Icon className="w-4 h-4 text-[#C9A84C] flex-shrink-0" />
-                          <span className="text-slate-600 text-sm">{text}</span>
-                        </div>
+              <div
+                key={idx}
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-16 items-start ${idx % 2 === 1 ? "lg:grid-flow-dense" : ""}`}
+              >
+                {/* ── Photo Column ── */}
+                <div className={`relative ${idx % 2 === 1 ? "lg:col-start-2" : ""}`}>
+                  {/* Decorative corner frames */}
+                  <div className="absolute -top-5 -left-5 w-20 h-20 border-l-2 border-t-2 border-[#C9A84C]/40 rounded-tl-2xl z-10" />
+                  <div className="absolute -bottom-5 -right-5 w-20 h-20 border-r-2 border-b-2 border-[#C9A84C]/25 rounded-br-2xl z-10" />
+
+                  {/* Photo frame with premium background */}
+                  <div className={`shadow-2xl ${member.isFounder ? "photo-frame-wrap" : "photo-frame-wrap-alt"}`}>
+                    {/* Gold accent dots */}
+                    <div className="absolute top-4 right-4 flex gap-1.5 z-10">
+                      {[0,1,2].map(i => (
+                        <span key={i} className="w-1.5 h-1.5 rounded-full bg-[#C9A84C]/60" />
                       ))}
                     </div>
+                    <img
+                      key={mounted ? "mounted" : "initial"}
+                      src={member.image}
+                      alt={member.name}
+                      className={`aspect-[4/5] object-cover object-top ${member.isFounder && mounted ? "photo-reveal" : ""}`}
+                    />
+                    {/* Bottom nameplate inside frame */}
+                    <div className="relative z-10 px-4 py-4 flex items-center justify-between">
+                      <div>
+                        <p className="text-white font-bold text-sm leading-none">{member.name}</p>
+                        <p className="text-[#C9A84C] text-xs mt-0.5">{member.title}</p>
+                      </div>
+                      <a
+                        href={member.whatsapp}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 bg-[#25D366] text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-[#1da851] transition-colors"
+                      >
+                        <MessageCircle className="w-3.5 h-3.5" />
+                        WhatsApp
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Credentials below photo */}
+                  <div className="mt-5 grid grid-cols-1 gap-2.5">
+                    {member.credentials.map(({ icon: Icon, text }, cidx) => (
+                      <div key={cidx} className="flex items-center gap-3 bg-[#FAF8F3] border border-slate-100 rounded-xl px-4 py-3 hover:border-[#C9A84C]/30 hover:shadow-sm transition-all">
+                        <div className="w-7 h-7 rounded-lg bg-[#1a3a52] flex items-center justify-center flex-shrink-0">
+                          <Icon className="w-3.5 h-3.5 text-[#C9A84C]" />
+                        </div>
+                        <span className="text-slate-600 text-sm">{text}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                {/* Content */}
+                {/* ── Content Column ── */}
                 <div className={idx % 2 === 1 ? "lg:col-start-1 lg:row-start-1" : ""}>
                   <div className="nexus-accent-line mb-2" />
                   <h2 className="text-4xl md:text-5xl font-bold text-[#1a3a52] mb-1">{member.name}</h2>
-                  <p className="text-lg text-[#C9A84C] font-semibold mb-6">{member.title}</p>
+                  <p className="text-lg text-[#C9A84C] font-semibold mb-6 italic" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                    {member.title}
+                  </p>
+
+                  {/* Divider */}
+                  <div className="h-px bg-gradient-to-r from-[#C9A84C]/30 via-[#C9A84C]/10 to-transparent mb-6" />
 
                   <div className="space-y-4 mb-8">
                     {member.bio.map((para, pidx) => (
@@ -169,12 +197,15 @@ export default function Team() {
 
                   {/* Expertise */}
                   <div className="mb-8">
-                    <h3 className="text-sm font-bold text-[#1a3a52] uppercase tracking-widest mb-4">Areas of Expertise</h3>
+                    <h3 className="text-xs font-bold text-[#1a3a52] uppercase tracking-[0.15em] mb-4 flex items-center gap-2">
+                      <span className="w-4 h-px bg-[#C9A84C]" />
+                      Areas of Expertise
+                    </h3>
                     <div className="flex flex-wrap gap-2">
                       {member.expertise.map((exp, eidx) => (
                         <span
                           key={eidx}
-                          className="px-4 py-2 rounded-full text-sm font-semibold text-[#1a3a52] border border-[#C9A84C]/30 bg-[#C9A84C]/8"
+                          className="px-4 py-2 rounded-full text-sm font-semibold text-[#1a3a52] border border-[#C9A84C]/30 bg-[#C9A84C]/8 hover:bg-[#C9A84C]/15 transition-colors"
                         >
                           {exp}
                         </span>
@@ -182,20 +213,20 @@ export default function Team() {
                     </div>
                   </div>
 
-                  {/* Contact */}
-                  <div className="border-t border-slate-100 pt-6 flex flex-col sm:flex-row gap-4">
+                  {/* Contact strip */}
+                  <div className="rounded-xl border border-slate-100 bg-[#FAF8F3] p-5 flex flex-col sm:flex-row gap-4">
                     <a
                       href={`mailto:${member.email}`}
-                      className="inline-flex items-center gap-2 text-[#1a3a52] hover:text-[#C9A84C] transition-colors font-semibold text-sm"
+                      className="flex items-center gap-2 text-[#1a3a52] hover:text-[#C9A84C] transition-colors font-semibold text-sm group"
                     >
-                      <Mail className="w-4 h-4" />
+                      <Mail className="w-4 h-4 text-[#C9A84C]" />
                       {member.email}
                     </a>
                     <a
                       href={`tel:${member.phone.replace(/\s/g, "")}`}
-                      className="inline-flex items-center gap-2 text-[#1a3a52] hover:text-[#C9A84C] transition-colors font-semibold text-sm"
+                      className="flex items-center gap-2 text-[#1a3a52] hover:text-[#C9A84C] transition-colors font-semibold text-sm"
                     >
-                      <Phone className="w-4 h-4" />
+                      <Phone className="w-4 h-4 text-[#C9A84C]" />
                       {member.phone}
                     </a>
                   </div>

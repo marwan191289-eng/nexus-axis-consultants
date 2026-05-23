@@ -43,14 +43,13 @@
 }
 
 :root {
-  /* Nexus Axis Brand Colors */
   --nexus-navy: #1a3a52;
   --nexus-gold: #C9A84C;
   --nexus-gold-light: #E8D4A8;
   --nexus-navy-light: #2d5a7b;
   --nexus-navy-dark: #0f1f2e;
   --nexus-cream: #FAF8F3;
-  
+
   --primary: #1a3a52;
   --primary-foreground: #ffffff;
   --sidebar-primary: #1a3a52;
@@ -60,7 +59,7 @@
   --chart-3: #2d5a7b;
   --chart-4: #0f1f2e;
   --chart-5: #8b7355;
-  
+
   --radius: 0.5rem;
   --background: oklch(0.99 0.003 90);
   --foreground: oklch(0.15 0.02 260);
@@ -88,9 +87,7 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
+  * { @apply border-border outline-ring/50; }
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', sans-serif;
@@ -115,10 +112,37 @@
   }
 }
 
+/* ── Global keyframes (outside layer so they're always available) ── */
+@keyframes grayscaleToColor {
+  0%   { filter: grayscale(100%) brightness(0.85) contrast(1.1) sepia(0.1); }
+  30%  { filter: grayscale(85%)  brightness(0.9)  contrast(1.06); }
+  60%  { filter: grayscale(45%)  brightness(0.96) contrast(1.02); }
+  85%  { filter: grayscale(10%)  brightness(0.99); }
+  100% { filter: grayscale(0%)   brightness(1)    contrast(1); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes whatsapp-pulse {
+  0%   { transform: scale(1);   opacity: 0.5; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 @layer components {
-
-  /* ─── Nexus Brand Components ─── */
-
+  /* ── Brand Cards ── */
   .nexus-card {
     @apply bg-white border border-slate-100 rounded-xl p-8 shadow-sm transition-all duration-300;
     position: relative;
@@ -127,68 +151,46 @@
   .nexus-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 3px;
-    height: 100%;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
     background: linear-gradient(180deg, #C9A84C 0%, transparent 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
   }
-  .nexus-card:hover::before {
-    opacity: 1;
-  }
+  .nexus-card:hover::before { opacity: 1; }
   .nexus-card:hover {
     @apply shadow-xl border-[#C9A84C]/30;
     transform: translateY(-3px);
   }
 
+  /* ── Buttons ── */
   .nexus-button-primary {
-    @apply bg-[#1a3a52] text-white px-8 py-3.5 rounded-lg font-semibold transition-all duration-300 text-sm tracking-wide;
+    @apply bg-[#1a3a52] text-white px-8 py-3.5 rounded-lg font-semibold transition-all duration-300 text-sm;
     letter-spacing: 0.03em;
   }
   .nexus-button-primary:hover {
     background: #0f1f2e;
-    box-shadow: 0 8px 24px rgba(26, 58, 82, 0.4);
+    box-shadow: 0 8px 24px rgba(26,58,82,0.4);
     transform: translateY(-1px);
   }
-
   .nexus-button-secondary {
     @apply border-2 border-[#C9A84C] text-[#1a3a52] px-8 py-3.5 rounded-lg font-semibold transition-all duration-300 text-sm;
     letter-spacing: 0.03em;
   }
   .nexus-button-secondary:hover {
     @apply bg-[#C9A84C] text-[#1a3a52];
-    box-shadow: 0 8px 24px rgba(201, 168, 76, 0.3);
+    box-shadow: 0 8px 24px rgba(201,168,76,0.3);
   }
 
-  .nexus-button-ghost {
-    @apply text-[#1a3a52] px-6 py-3 rounded-lg font-semibold transition-all duration-300 text-sm border border-transparent;
-  }
-  .nexus-button-ghost:hover {
-    @apply border-[#C9A84C]/40 bg-[#C9A84C]/8;
-  }
-
-  .nexus-section-title {
-    @apply text-4xl md:text-5xl font-bold text-[#1a3a52] mb-4;
-  }
-
-  .nexus-section-subtitle {
-    @apply text-lg text-slate-500 mb-8 max-w-2xl leading-relaxed;
-  }
+  /* ── Typography ── */
+  .nexus-section-title   { @apply text-4xl md:text-5xl font-bold text-[#1a3a52] mb-4; }
+  .nexus-section-subtitle { @apply text-lg text-slate-500 mb-8 max-w-2xl leading-relaxed; }
 
   .nexus-accent-line {
-    width: 48px;
-    height: 2px;
+    width: 48px; height: 2px;
     background: linear-gradient(90deg, #C9A84C, #E8D4A8);
     margin-bottom: 1rem;
     border-radius: 2px;
-  }
-
-  .nexus-gold-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #C9A84C 30%, #C9A84C 70%, transparent);
-    margin: 3rem 0;
   }
 
   .nexus-gradient-text {
@@ -198,195 +200,164 @@
     background-clip: text;
   }
 
-  .nexus-gold-text {
-    color: #C9A84C;
-  }
-
-  .nexus-hero-overlay {
-    background: linear-gradient(
-      135deg,
-      rgba(15, 31, 46, 0.97) 0%,
-      rgba(26, 58, 82, 0.92) 50%,
-      rgba(45, 90, 123, 0.85) 100%
-    );
-  }
-
-  .nexus-pattern-bg {
-    background-color: #FAF8F3;
-    background-image:
-      repeating-linear-gradient(
-        45deg,
-        rgba(201, 168, 76, 0.03) 0px,
-        rgba(201, 168, 76, 0.03) 1px,
-        transparent 1px,
-        transparent 60px
-      ),
-      repeating-linear-gradient(
-        -45deg,
-        rgba(201, 168, 76, 0.03) 0px,
-        rgba(201, 168, 76, 0.03) 1px,
-        transparent 1px,
-        transparent 60px
-      );
-  }
-
-  .nexus-stat-card {
-    @apply text-center p-6;
-    position: relative;
-  }
-  .nexus-stat-card::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 20%;
-    height: 60%;
-    width: 1px;
-    background: rgba(201, 168, 76, 0.25);
-  }
-  .nexus-stat-card:last-child::after {
-    display: none;
-  }
-
+  /* ── UI Chips ── */
   .nexus-tag {
     @apply inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase;
-    background: rgba(201, 168, 76, 0.12);
+    background: rgba(201,168,76,0.12);
     color: #C9A84C;
-    border: 1px solid rgba(201, 168, 76, 0.25);
+    border: 1px solid rgba(201,168,76,0.25);
     letter-spacing: 0.1em;
   }
-
   .nexus-hero-badge {
     @apply inline-flex items-center gap-2.5 px-5 py-2.5 mb-8 rounded-full;
-    background: rgba(201, 168, 76, 0.1);
-    border: 1px solid rgba(201, 168, 76, 0.3);
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
     backdrop-filter: blur(8px);
   }
 
-  .nexus-testimonial-card {
-    @apply bg-white border border-slate-100 rounded-2xl p-8 shadow-md;
-    position: relative;
+  /* ── Backgrounds ── */
+  .nexus-pattern-bg {
+    background-color: #FAF8F3;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(201,168,76,0.03) 0px, rgba(201,168,76,0.03) 1px, transparent 1px, transparent 60px),
+      repeating-linear-gradient(-45deg, rgba(201,168,76,0.03) 0px, rgba(201,168,76,0.03) 1px, transparent 1px, transparent 60px);
   }
-  .nexus-testimonial-card::before {
-    content: '\201C';
-    position: absolute;
-    top: -0.5rem;
-    left: 1.5rem;
-    font-size: 5rem;
-    color: #C9A84C;
-    opacity: 0.15;
-    font-family: 'Playfair Display', serif;
-    line-height: 1;
+  .nexus-hero-overlay {
+    background: linear-gradient(135deg, rgba(15,31,46,0.97) 0%, rgba(26,58,82,0.92) 50%, rgba(45,90,123,0.85) 100%);
   }
 
+  /* ── Service icon ── */
   .nexus-service-icon {
     @apply w-14 h-14 rounded-xl flex items-center justify-center mb-5 transition-all duration-300;
-    background: linear-gradient(135deg, rgba(201, 168, 76, 0.12), rgba(201, 168, 76, 0.06));
-    border: 1px solid rgba(201, 168, 76, 0.2);
+    background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.06));
+    border: 1px solid rgba(201,168,76,0.2);
   }
   .nexus-card:hover .nexus-service-icon {
-    background: linear-gradient(135deg, rgba(201, 168, 76, 0.22), rgba(201, 168, 76, 0.12));
-    border-color: rgba(201, 168, 76, 0.4);
+    background: linear-gradient(135deg, rgba(201,168,76,0.22), rgba(201,168,76,0.12));
+    border-color: rgba(201,168,76,0.4);
   }
 
-  /* Animations */
-  .fade-in-up {
-    animation: fadeInUp 0.7s ease-out both;
+  /* ── Stat card ── */
+  .nexus-stat-card { @apply text-center p-6; position: relative; }
+  .nexus-stat-card::after {
+    content: '';
+    position: absolute; right: 0; top: 20%; height: 60%; width: 1px;
+    background: rgba(201,168,76,0.25);
   }
-  .fade-in-up-delay-1 { animation: fadeInUp 0.7s ease-out 0.1s both; }
-  .fade-in-up-delay-2 { animation: fadeInUp 0.7s ease-out 0.2s both; }
-  .fade-in-up-delay-3 { animation: fadeInUp 0.7s ease-out 0.3s both; }
+  .nexus-stat-card:last-child::after { display: none; }
 
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0);    }
+  /* ── Pricing card ── */
+  .pricing-card {
+    @apply rounded-2xl border transition-all duration-300 overflow-hidden;
+  }
+  .pricing-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 48px rgba(0,0,0,0.12);
+  }
+  .pricing-card.featured {
+    border-color: #C9A84C;
+    box-shadow: 0 0 0 1px #C9A84C, 0 20px 40px rgba(201,168,76,0.15);
   }
 
-  .slide-in-right {
-    animation: slideInRight 0.7s ease-out both;
+  /* ── Shimmer on pricing badge ── */
+  .shimmer-badge {
+    position: relative;
+    overflow: hidden;
   }
-  @keyframes slideInRight {
-    from { opacity: 0; transform: translateX(40px); }
-    to   { opacity: 1; transform: translateX(0);    }
+  .shimmer-badge::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 2.5s ease-in-out infinite;
   }
 
-  /* WhatsApp Float Button */
+  /* ── Photo reveal animation (B&W → colour) ── */
+  /* 'animation-fill-mode: both' = backwards+forwards.
+     'backwards' means: during delay, the element shows the 0% keyframe (full grayscale).
+     'forwards' means: after animation ends, stay at 100% keyframe (full colour). */
+  .photo-reveal {
+    animation: grayscaleToColor 4s ease-out 0.2s both;
+    will-change: filter;
+  }
+
+  /* ── Photo frame / background ── */
+  .photo-frame-wrap {
+    background: linear-gradient(160deg, #0a1520 0%, #1a3a52 40%, #2d5a7b 75%, #1a3a52 100%);
+    position: relative;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    padding: 1.5rem 1.5rem 0;
+  }
+  .photo-frame-wrap::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(201,168,76,0.05) 0px, rgba(201,168,76,0.05) 1px, transparent 1px, transparent 36px);
+    pointer-events: none;
+  }
+  .photo-frame-wrap::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.7), transparent);
+  }
+  .photo-frame-wrap img {
+    position: relative; z-index: 1;
+    border-radius: 0.75rem 0.75rem 0 0;
+    display: block; width: 100%;
+  }
+
+  /* Standard photo frame for other team members */
+  .photo-frame-wrap-alt {
+    background: linear-gradient(160deg, #0f1f2e 0%, #1a3a52 60%, #2d5a7b 100%);
+    position: relative;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    padding: 1.5rem 1.5rem 0;
+  }
+  .photo-frame-wrap-alt::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.4), transparent);
+  }
+  .photo-frame-wrap-alt img {
+    position: relative; z-index: 1;
+    border-radius: 0.75rem 0.75rem 0 0;
+    display: block; width: 100%;
+  }
+
+  /* ── Animations ── */
+  .fade-in-up            { animation: fadeInUp 0.7s ease-out both; }
+  .fade-in-up-delay-1    { animation: fadeInUp 0.7s ease-out 0.1s both; }
+  .fade-in-up-delay-2    { animation: fadeInUp 0.7s ease-out 0.2s both; }
+  .fade-in-up-delay-3    { animation: fadeInUp 0.7s ease-out 0.3s both; }
+  .slide-in-right        { animation: slideInRight 0.7s ease-out both; }
+  .fade-in               { animation: fadeIn 0.6s ease-out both; }
+
+  /* ── WhatsApp Float ── */
   .whatsapp-float {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    z-index: 1000;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 50%;
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+    width: 3.5rem; height: 3.5rem; border-radius: 50%;
     background: #25D366;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
     transition: all 0.3s ease;
     text-decoration: none;
   }
   .whatsapp-float:hover {
     transform: scale(1.1);
-    box-shadow: 0 8px 28px rgba(37, 211, 102, 0.5);
+    box-shadow: 0 8px 28px rgba(37,211,102,0.5);
   }
   .whatsapp-float::before {
     content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
+    position: absolute; inset: 0; border-radius: 50%;
     background: #25D366;
     animation: whatsapp-pulse 2.5s ease-out infinite;
   }
-  @keyframes whatsapp-pulse {
-    0%   { transform: scale(1); opacity: 0.5; }
-    100% { transform: scale(1.8); opacity: 0; }
-  }
 }
 
-  /* Grayscale to colour reveal animation */
-  .photo-reveal {
-    animation: grayscaleToColor 3.5s ease-out forwards;
-    animation-delay: 0.3s;
-    filter: grayscale(100%);
-  }
-  @keyframes grayscaleToColor {
-    0%   { filter: grayscale(100%) brightness(0.9) contrast(1.05); }
-    40%  { filter: grayscale(80%)  brightness(0.95) contrast(1.02); }
-    70%  { filter: grayscale(30%)  brightness(1); }
-    100% { filter: grayscale(0%)   brightness(1) contrast(1); }
-  }
-
-  .photo-bg-premium {
-    background: linear-gradient(
-      145deg,
-      #0a1929 0%,
-      #1a3a52 35%,
-      #2d5a7b 65%,
-      #1a3a52 100%
-    );
-    position: relative;
-    overflow: hidden;
-  }
-  .photo-bg-premium::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: repeating-linear-gradient(
-      45deg,
-      rgba(201,168,76,0.04) 0px,
-      rgba(201,168,76,0.04) 1px,
-      transparent 1px,
-      transparent 40px
-    );
-    z-index: 0;
-  }
-  .photo-bg-premium img {
-    position: relative;
-    z-index: 1;
-  }
-
-/* Scrollbar */
+/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #f5f3ee; }
 ::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 3px; }
