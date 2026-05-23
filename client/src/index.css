@@ -45,24 +45,24 @@
 :root {
   /* Nexus Axis Brand Colors */
   --nexus-navy: #1a3a52;
-  --nexus-gold: #D4AF37;
+  --nexus-gold: #C9A84C;
   --nexus-gold-light: #E8D4A8;
   --nexus-navy-light: #2d5a7b;
   --nexus-navy-dark: #0f1f2e;
+  --nexus-cream: #FAF8F3;
   
-  /* Tailwind Color Integration */
   --primary: #1a3a52;
   --primary-foreground: #ffffff;
   --sidebar-primary: #1a3a52;
   --sidebar-primary-foreground: #ffffff;
-  --chart-1: #D4AF37;
+  --chart-1: #C9A84C;
   --chart-2: #1a3a52;
   --chart-3: #2d5a7b;
   --chart-4: #0f1f2e;
   --chart-5: #8b7355;
   
-  --radius: 0.65rem;
-  --background: oklch(0.99 0 0);
+  --radius: 0.5rem;
+  --background: oklch(0.99 0.003 90);
   --foreground: oklch(0.15 0.02 260);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.15 0.02 260);
@@ -72,54 +72,19 @@
   --secondary-foreground: oklch(0.2 0.02 260);
   --muted: oklch(0.92 0.01 260);
   --muted-foreground: oklch(0.45 0.02 260);
-  --accent: #D4AF37;
+  --accent: #C9A84C;
   --accent-foreground: oklch(0.15 0.02 260);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
+  --border: oklch(0.90 0.005 286.32);
   --input: oklch(0.92 0.004 286.32);
   --ring: #1a3a52;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.15 0.02 260);
-  --sidebar-accent: #D4AF37;
+  --sidebar-accent: #C9A84C;
   --sidebar-accent-foreground: oklch(0.15 0.02 260);
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: #1a3a52;
-}
-
-.dark {
-  --primary: #D4AF37;
-  --primary-foreground: #1a3a52;
-  --sidebar-primary: #D4AF37;
-  --sidebar-primary-foreground: #1a3a52;
-  --background: oklch(0.12 0.02 260);
-  --foreground: oklch(0.95 0.01 260);
-  --card: oklch(0.18 0.02 260);
-  --card-foreground: oklch(0.95 0.01 260);
-  --popover: oklch(0.18 0.02 260);
-  --popover-foreground: oklch(0.95 0.01 260);
-  --secondary: oklch(0.25 0.02 260);
-  --secondary-foreground: oklch(0.85 0.01 260);
-  --muted: oklch(0.35 0.02 260);
-  --muted-foreground: oklch(0.7 0.02 260);
-  --accent: #D4AF37;
-  --accent-foreground: #1a3a52;
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: #D4AF37;
-  --chart-1: #D4AF37;
-  --chart-2: #2d5a7b;
-  --chart-3: #1a3a52;
-  --chart-4: #8b7355;
-  --chart-5: #E8D4A8;
-  --sidebar: oklch(0.18 0.02 260);
-  --sidebar-foreground: oklch(0.95 0.01 260);
-  --sidebar-accent: #D4AF37;
-  --sidebar-accent-foreground: #1a3a52;
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: #D4AF37;
 }
 
 @layer base {
@@ -129,6 +94,8 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
@@ -149,82 +116,57 @@
 }
 
 @layer components {
-  /* Premium Legal Consulting Styles */
-  
-  .container {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
 
-  .flex {
-    min-height: 0;
-    min-width: 0;
-  }
-
-  @media (min-width: 640px) {
-    .container {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .container {
-      padding-left: 2rem;
-      padding-right: 2rem;
-      max-width: 1280px;
-    }
-  }
-
-  /* Nexus Axis Brand Components */
-  
-  .nexus-gradient-text {
-    background: linear-gradient(135deg, #1a3a52 0%, #D4AF37 50%, #1a3a52 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .nexus-gold-accent {
-    color: #D4AF37;
-  }
-
-  .nexus-navy-bg {
-    background-color: #1a3a52;
-  }
-
-  .nexus-section-divider {
-    height: 3px;
-    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
-    margin: 2rem 0;
-  }
+  /* ─── Nexus Brand Components ─── */
 
   .nexus-card {
-    @apply bg-white border border-slate-200 rounded-lg p-6 shadow-sm transition-all duration-300;
+    @apply bg-white border border-slate-100 rounded-xl p-8 shadow-sm transition-all duration-300;
+    position: relative;
+    overflow: hidden;
   }
-
+  .nexus-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, #C9A84C 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .nexus-card:hover::before {
+    opacity: 1;
+  }
   .nexus-card:hover {
-    @apply shadow-lg border-[#D4AF37];
-    transform: translateY(-2px);
+    @apply shadow-xl border-[#C9A84C]/30;
+    transform: translateY(-3px);
   }
 
   .nexus-button-primary {
-    @apply bg-[#1a3a52] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+    @apply bg-[#1a3a52] text-white px-8 py-3.5 rounded-lg font-semibold transition-all duration-300 text-sm tracking-wide;
+    letter-spacing: 0.03em;
   }
-
   .nexus-button-primary:hover {
-    @apply bg-[#0f1f2e] shadow-lg;
+    background: #0f1f2e;
+    box-shadow: 0 8px 24px rgba(26, 58, 82, 0.4);
+    transform: translateY(-1px);
   }
 
   .nexus-button-secondary {
-    @apply border-2 border-[#D4AF37] text-[#1a3a52] px-6 py-3 rounded-lg font-semibold transition-all duration-300;
+    @apply border-2 border-[#C9A84C] text-[#1a3a52] px-8 py-3.5 rounded-lg font-semibold transition-all duration-300 text-sm;
+    letter-spacing: 0.03em;
+  }
+  .nexus-button-secondary:hover {
+    @apply bg-[#C9A84C] text-[#1a3a52];
+    box-shadow: 0 8px 24px rgba(201, 168, 76, 0.3);
   }
 
-  .nexus-button-secondary:hover {
-    @apply bg-[#D4AF37] text-[#1a3a52];
+  .nexus-button-ghost {
+    @apply text-[#1a3a52] px-6 py-3 rounded-lg font-semibold transition-all duration-300 text-sm border border-transparent;
+  }
+  .nexus-button-ghost:hover {
+    @apply border-[#C9A84C]/40 bg-[#C9A84C]/8;
   }
 
   .nexus-section-title {
@@ -232,52 +174,178 @@
   }
 
   .nexus-section-subtitle {
-    @apply text-lg text-slate-600 mb-8 max-w-2xl;
+    @apply text-lg text-slate-500 mb-8 max-w-2xl leading-relaxed;
   }
 
   .nexus-accent-line {
-    @apply w-16 h-1 bg-[#D4AF37] mb-4;
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, #C9A84C, #E8D4A8);
+    margin-bottom: 1rem;
+    border-radius: 2px;
+  }
+
+  .nexus-gold-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #C9A84C 30%, #C9A84C 70%, transparent);
+    margin: 3rem 0;
+  }
+
+  .nexus-gradient-text {
+    background: linear-gradient(135deg, #1a3a52 0%, #C9A84C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .nexus-gold-text {
+    color: #C9A84C;
+  }
+
+  .nexus-hero-overlay {
+    background: linear-gradient(
+      135deg,
+      rgba(15, 31, 46, 0.97) 0%,
+      rgba(26, 58, 82, 0.92) 50%,
+      rgba(45, 90, 123, 0.85) 100%
+    );
+  }
+
+  .nexus-pattern-bg {
+    background-color: #FAF8F3;
+    background-image:
+      repeating-linear-gradient(
+        45deg,
+        rgba(201, 168, 76, 0.03) 0px,
+        rgba(201, 168, 76, 0.03) 1px,
+        transparent 1px,
+        transparent 60px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        rgba(201, 168, 76, 0.03) 0px,
+        rgba(201, 168, 76, 0.03) 1px,
+        transparent 1px,
+        transparent 60px
+      );
+  }
+
+  .nexus-stat-card {
+    @apply text-center p-6;
+    position: relative;
+  }
+  .nexus-stat-card::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 20%;
+    height: 60%;
+    width: 1px;
+    background: rgba(201, 168, 76, 0.25);
+  }
+  .nexus-stat-card:last-child::after {
+    display: none;
+  }
+
+  .nexus-tag {
+    @apply inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase;
+    background: rgba(201, 168, 76, 0.12);
+    color: #C9A84C;
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    letter-spacing: 0.1em;
+  }
+
+  .nexus-hero-badge {
+    @apply inline-flex items-center gap-2.5 px-5 py-2.5 mb-8 rounded-full;
+    background: rgba(201, 168, 76, 0.1);
+    border: 1px solid rgba(201, 168, 76, 0.3);
+    backdrop-filter: blur(8px);
+  }
+
+  .nexus-testimonial-card {
+    @apply bg-white border border-slate-100 rounded-2xl p-8 shadow-md;
+    position: relative;
+  }
+  .nexus-testimonial-card::before {
+    content: '\201C';
+    position: absolute;
+    top: -0.5rem;
+    left: 1.5rem;
+    font-size: 5rem;
+    color: #C9A84C;
+    opacity: 0.15;
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+  }
+
+  .nexus-service-icon {
+    @apply w-14 h-14 rounded-xl flex items-center justify-center mb-5 transition-all duration-300;
+    background: linear-gradient(135deg, rgba(201, 168, 76, 0.12), rgba(201, 168, 76, 0.06));
+    border: 1px solid rgba(201, 168, 76, 0.2);
+  }
+  .nexus-card:hover .nexus-service-icon {
+    background: linear-gradient(135deg, rgba(201, 168, 76, 0.22), rgba(201, 168, 76, 0.12));
+    border-color: rgba(201, 168, 76, 0.4);
   }
 
   /* Animations */
   .fade-in-up {
-    animation: fadeInUp 0.6s ease-out;
+    animation: fadeInUp 0.7s ease-out both;
   }
+  .fade-in-up-delay-1 { animation: fadeInUp 0.7s ease-out 0.1s both; }
+  .fade-in-up-delay-2 { animation: fadeInUp 0.7s ease-out 0.2s both; }
+  .fade-in-up-delay-3 { animation: fadeInUp 0.7s ease-out 0.3s both; }
 
   @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0);    }
   }
 
-  .hover-gold {
-    @apply transition-colors duration-300;
+  .slide-in-right {
+    animation: slideInRight 0.7s ease-out both;
+  }
+  @keyframes slideInRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to   { opacity: 1; transform: translateX(0);    }
   }
 
-  .hover-gold:hover {
-    @apply text-[#D4AF37];
+  /* WhatsApp Float Button */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1000;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background: #25D366;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+  .whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 28px rgba(37, 211, 102, 0.5);
+  }
+  .whatsapp-float::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: #25D366;
+    animation: whatsapp-pulse 2.5s ease-out infinite;
+  }
+  @keyframes whatsapp-pulse {
+    0%   { transform: scale(1); opacity: 0.5; }
+    100% { transform: scale(1.8); opacity: 0; }
   }
 }
 
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #f5f5f5;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #D4AF37;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #1a3a52;
-}
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f5f3ee; }
+::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #1a3a52; }
